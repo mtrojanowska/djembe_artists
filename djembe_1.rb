@@ -1,5 +1,5 @@
 class Artist
-  attr_accessor :name, :list
+  attr_accessor :name
 
   def initialize(name)
     @name = name
@@ -7,8 +7,7 @@ class Artist
 
   def create(artist)
     @artist = artist
-    @artist
-    p @artist.name
+    @artist.name
   end
 
   def update(name)
@@ -16,22 +15,31 @@ class Artist
   end
 end
 
-class List < Artist
+class List
   attr_accessor :list
+
   def initialize(list)
-    @list = list
+    @list = []
   end
 
-  def save(*artists)
-    @list = []
-    artists.each do |artist|
-    @list << artist
-    end
-    p @list
+  def add_to_list(artist)
+    @list.push(artist)
   end
+
+  def print_list
+    print @list
+  end
+
+  # def save(*artists)
+  #   @list = []
+  #   artists.each do |artist|
+  #   @list << artist
+  #   end
+  #   @list
+  # end
 
   def destroy(artist)
-    @list.delete(@artist)
+    @list.delete(artist)
     @list
   end
 end
@@ -43,9 +51,25 @@ artist2 = Artist.new("Zulugula")
 
 artist.update("Santa Klaus")
 
-list = List.new("Artists")
+artists = List.new("Artists")
 
 
-list.save(Artist.new("Obi").name, Artist.new("Kenobi").name, Artist.new("Leah").name, Artist.new("Chewbacca").name)
+artists.destroy("Obi")
 
-list.save(artist.name, artist1.name, artist2.name)
+artist3=artist.create(Artist.new("One"))
+
+artists.add_to_list(artist3)
+
+
+artist4=artist.create(Artist.new("Two"))
+artists.add_to_list(artist4)
+
+
+artist5=artist.create(Artist.new("Three"))
+artists.add_to_list(artist5)
+
+artists.print_list
+
+
+#artists.save(Artist.new("Obi").name, Artist.new("Kenobi").name, Artist.new("Leah").name, Artist.new("Chewbacca").name)
+# artists.save(artist.name, artist1.name, artist2.name)
