@@ -1,11 +1,10 @@
-require './artist'
-require './song'
+require_relative 'artist'
+require_relative 'song'
 
 class List
-  attr_accessor :list_of_artists, :songs_list
+  attr_accessor :songs_list
 
-  def initialize(list, songs_list)
-    @list_of_artists = []
+  def initialize(songs_list)
     @songs_list = Hash.new {|h, k| h[k] = [] }
   end
 
@@ -16,7 +15,7 @@ class List
 
   def complete_list
       @songs_list.each do |artist, songs|
-        p "#{artist.name} recorded:"
+        p "#{artist.name} recorded following songs:"
         songs.each do |song|
         p "#{song.title}"
       end
@@ -47,5 +46,7 @@ class List
       end
     end
   end
+
+
 
 end

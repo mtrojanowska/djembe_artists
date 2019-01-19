@@ -7,7 +7,5 @@ class Song
     @premiere = premiere
   end
 
-  def create(song)
-    @song = song
-  end
+  
 end

@@ -7,11 +7,17 @@ class Artist
     @origin = origin
   end
 
-  def create(artist)
-    @artist = artist
-  end
-
-  def update(name)
+  def update_name(name)
     @name = name
   end
+
+  def update_birthdate(birthdate)
+    @birthdate = birthdate
+  end
+
+  def update_origin(origin)
+    @origin = origin
+  end
+
+
 end
