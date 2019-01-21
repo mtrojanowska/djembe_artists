@@ -1,52 +1,35 @@
-require_relative 'artist'
-require_relative 'song'
+
 
 class List
-  attr_accessor :songs_list
 
-  def initialize(songs_list)
-    @songs_list = Hash.new {|h, k| h[k] = [] }
-  end
+attr_accessor :list_title, :songs_list
 
-  def add_to_songs_list(artist,song)
-     @songs_list[artist]<<song
-     @songs_list
-  end
+ def initialize(list_title)
+   @list_title = list_title
+ end
 
-  def complete_list
-      @songs_list.each do |artist, songs|
-        p "#{artist.name} recorded following songs:"
+ def output_complete_list(artist)
+      artist.songs_list.each do |artist, songs|
+        p "#{artist} recorded following songs:"
         songs.each do |song|
-        p "#{song.title}"
+        p "#{song}"
       end
     end
   end
 
-  def output_artists_song_list(required_artist)
-     @songs_list.each do |artist, songs|
-        if required_artist == artist
-          p "#{artist.name} recorded following songs:"
-          songs.each do |song|
-          p "#{song.title}"
+  def delete(artist, required_artist)
+    artist.songs_list.delete(required_artist)
+  end
+
+  def delete_song(artist,required_song)
+    artist.songs_list.each do |artist, songs|
+      songs.each do |song|
+        if required_song == song
+          songs.delete(song)
         end
       end
     end
   end
-
-  def delete_artist(artist)
-    @songs_list.delete(artist)
-  end
-
-  def delete_song(required_artist, required_song)
-      @songs_list.each do |artist, songs|
-        songs.each do |song|
-          if required_artist == artist && required_song == song
-            @songs_list[artist].delete(song)
-        end
-      end
-    end
-  end
-
 
 
 end
