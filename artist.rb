@@ -1,9 +1,13 @@
+
+
 class Artist
-  attr_accessor :name, :birthdate, :origin, :artists_list
+  attr_accessor :name, :birthdate, :origin, :songs_list
 
   def initialize(name:, birthdate:, origin:)
-    @name, @birthdate, @origin = name, birthdate, origin
-    @artists_list = []
+    @name = name
+    @birthdate = birthdate
+    @origin = origin
+    @songs_list = []
   end
 
   def update(name:, birthdate:, origin:)
@@ -12,16 +16,12 @@ class Artist
     @origin = origin
   end
 
-  def add_to_lists(song)
-     @artists_list<<song
+  def add_to_list(song)
+    @songs_list << song
   end
 
   def delete_song(required_song)
-    @artists_list.each do |song|
-     if required_song == song
-       @artists_list.delete(song)
+    @songs_list.delete_if { |song| song == required_song }
   end
-  end
-end
 
 end

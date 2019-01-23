@@ -1,29 +1,40 @@
+# frozen_string_literal: true
+
 require_relative 'artist'
 require_relative 'song'
 require_relative 'list'
 
-song = Song.new(title: "First song", premiere: "1998.11.04")
+song = Song.new(title: 'First song', premiere: '1998.11.04')
+song1 = Song.new(title: 'Second song', premiere: '1996.10.01')
+song2 = Song.new(title: 'Third song', premiere: '1988.07.23')
 
-artist = Artist.new(name: "Yamadu", birthdate: "1950.08.04", origin: "Guinea")
+artist = Artist.new(name: 'Yamadu', birthdate: '1950.08.04', origin: 'Guinea')
+artist1 = Artist.new(name: 'Bolokada', birthdate: '1968.12.01', origin: 'Guinea')
+artist2 = Artist.new(name: 'Famoudou', birthdate: '1974.07.18', origin: 'Guinea')
 
-artist1 = Artist.new(name: "Bolokada", birthdate: "1968.12.01", origin: "Guinea")
-artist2 = Artist.new(name: "Famoudou", birthdate: "1974.07.18", origin: "Guinea")
+artist2.update(name: 'Famoudou_one', birthdate: '1975.07.18', origin: 'G')
+# p artist2.name
 
-artist2.update(name: "Famoudou_one", birthdate: "1975.07.18", origin: "G")
-#p artist2.name
+artist.add_to_list(song)
+artist.add_to_list(song1)
+artist1.add_to_list(song1)
+artist1.add_to_list(song2)
 
-artist.add_to_lists("First song")
-artist.add_to_lists("Second song")
-artist1.add_to_lists("1First song")
-artist1.add_to_lists("1Second song")
+list = List.new('List')
+# list.output_list(artist)
+# song.update(title: '11First song', premiere: '1999. 02, 22')
+# list.output_list(artist)
 
-list = List.new("List")
-artist.delete_song("First song")
-list.output_list(artist)
-
+list.add_to_artists(artist)
+list.add_to_artists(artist1)
+list.add_to_artists(artist2)
+list.show_artists
 list.delete_artist(artist)
-p list
+list.show_artists
 
-#list.delete(artist, "Yamadu")
-
-#list.output_list(artist1)
+# artist.delete_song(song)
+# list.output_list(artist)
+# list.delete_artist(artist)
+# p list
+# list.delete(artist, "Yamadu")
+# list.output_list(artist1)
