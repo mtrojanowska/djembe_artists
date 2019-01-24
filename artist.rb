@@ -1,7 +1,7 @@
-
+# frozen_string_literal: true
 
 class Artist
-  attr_accessor :name, :birthdate, :origin, :songs_list
+  attr_accessor :name, :birthdate, :origin
 
   def initialize(name:, birthdate:, origin:)
     @name = name
@@ -23,5 +23,4 @@ class Artist
   def delete_song(required_song)
     @songs_list.delete_if { |song| song == required_song }
   end
-
 end

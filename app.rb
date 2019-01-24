@@ -12,18 +12,13 @@ artist = Artist.new(name: 'Yamadu', birthdate: '1950.08.04', origin: 'Guinea')
 artist1 = Artist.new(name: 'Bolokada', birthdate: '1968.12.01', origin: 'Guinea')
 artist2 = Artist.new(name: 'Famoudou', birthdate: '1974.07.18', origin: 'Guinea')
 
-artist2.update(name: 'Famoudou_one', birthdate: '1975.07.18', origin: 'G')
-# p artist2.name
-
 artist.add_to_list(song)
 artist.add_to_list(song1)
 artist1.add_to_list(song1)
 artist1.add_to_list(song2)
 
 list = List.new('List')
-# list.output_list(artist)
-# song.update(title: '11First song', premiere: '1999. 02, 22')
-# list.output_list(artist)
+
 
 list.add_to_artists(artist)
 list.add_to_artists(artist1)
@@ -31,10 +26,3 @@ list.add_to_artists(artist2)
 list.show_artists
 list.delete_artist(artist)
 list.show_artists
-
-# artist.delete_song(song)
-# list.output_list(artist)
-# list.delete_artist(artist)
-# p list
-# list.delete(artist, "Yamadu")
-# list.output_list(artist1)
