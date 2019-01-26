@@ -2,6 +2,7 @@
 
 class Artist
   attr_accessor :name, :birthdate, :origin
+  attr_reader :songs_list
 
   def initialize(name:, birthdate:, origin:)
     @name = name

@@ -2,6 +2,9 @@
 
 class List
   attr_accessor :list_title
+  attr_reader :list_of_artists
+
+
 
   def initialize(list_title)
     @list_title = list_title
@@ -13,8 +16,8 @@ class List
   end
 
   def show_artists
-    @list_of_artists.each do |artist|
-      p artist.name.to_s
+    @list_of_artists.each_with_index do |artist, i|
+      p "#{i+1}. #{artist.name}"
     end
   end
 

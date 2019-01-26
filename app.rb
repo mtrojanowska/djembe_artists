@@ -4,25 +4,30 @@ require_relative 'artist'
 require_relative 'song'
 require_relative 'list'
 
-song = Song.new(title: 'First song', premiere: '1998.11.04')
-song1 = Song.new(title: 'Second song', premiere: '1996.10.01')
-song2 = Song.new(title: 'Third song', premiere: '1988.07.23')
+list = List.new("First_list")
 
-artist = Artist.new(name: 'Yamadu', birthdate: '1950.08.04', origin: 'Guinea')
-artist1 = Artist.new(name: 'Bolokada', birthdate: '1968.12.01', origin: 'Guinea')
-artist2 = Artist.new(name: 'Famoudou', birthdate: '1974.07.18', origin: 'Guinea')
+p "Add to artists:"
+p "Name:"
+name_input = gets.chomp
+p "Date of birth:"
+birthdate_input = gets.chomp
+p "Country of origin:"
+origin_input = gets.chomp
 
-artist.add_to_list(song)
-artist.add_to_list(song1)
-artist1.add_to_list(song1)
-artist1.add_to_list(song2)
-
-list = List.new('List')
-
-
+artist = Artist.new(name: name_input, birthdate: birthdate_input, origin: origin_input)
 list.add_to_artists(artist)
-list.add_to_artists(artist1)
-list.add_to_artists(artist2)
+
+p "Add a song:"
+p "Song title:"
+song_title = gets.chomp
+p "Song release:"
+song_premiere = gets.chomp
+song = Song.new(title: song_title, premiere: song_premiere)
+artist.add_to_list(song)
+artist.songs_list
+
 list.show_artists
-list.delete_artist(artist)
-list.show_artists
+
+p "Show artist"
+artist = gets.chomp
+list.output_list(artist)
