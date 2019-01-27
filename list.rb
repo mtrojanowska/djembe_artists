@@ -4,8 +4,6 @@ class List
   attr_accessor :list_title
   attr_reader :list_of_artists
 
-
-
   def initialize(list_title)
     @list_title = list_title
     @list_of_artists = []
@@ -17,12 +15,12 @@ class List
 
   def show_artists
     @list_of_artists.each_with_index do |artist, i|
-      p "#{i+1}. #{artist.name}"
+      p "#{i + 1}. #{artist.name}"
     end
   end
 
   def output_list(artist)
-    p "#{artist.name} recorded following songs:"
+    p "#{artist.name}, born #{artist.birthdate} in #{artist.origin} recorded following songs:"
     artist.songs_list.each do |song|
       p "#{song.title}, released: #{song.premiere}"
     end
