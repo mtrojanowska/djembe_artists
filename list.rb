@@ -19,7 +19,14 @@ class List
     end
   end
 
-  def output_list(artist)
+  def find_artist(artist_to_display)
+    @list_of_artists.find do |artist|
+      artist.name == artist_to_display
+      artist.name.casecmp(artist_to_display)
+    end
+  end
+
+  def show_artist(artist)
     p "#{artist.name}, born #{artist.birthdate} in #{artist.origin} recorded following songs:"
     artist.songs_list.each do |song|
       p "#{song.title}, released: #{song.premiere}"

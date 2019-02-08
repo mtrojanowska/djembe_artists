@@ -4,87 +4,51 @@ require_relative 'artist'
 require_relative 'song'
 require_relative 'list'
 
-def submenu
-  list = List.new('LIST')
-  song = Song.new(title: 'First song', premiere: '1998.11.04')
-  song1 = Song.new(title: 'Second song', premiere: '1996.10.01')
-  song2 = Song.new(title: 'Third song', premiere: '1988.07.23')
-
-  artist = Artist.new(name: 'Yamadu', birthdate: '1950.08.04', origin: 'Guinea')
-  artist1 = Artist.new(name: 'Bolokada', birthdate: '1968.12.01', origin: 'Guinea')
-  artist2 = Artist.new(name: 'Famoudou', birthdate: '1974.07.18', origin: 'Guinea')
-  artist.add_to_list(song)
-  artist.add_to_list(song1)
-  artist1.add_to_list(song2)
-
-  list.add_to_artists(artist)
-  list.add_to_artists(artist1)
-  list.add_to_artists(artist2)
-
+def song_menu(list, artist)
   p '-------------------------------------------------------------'
-  puts "1. Edit an Artist\n2. Add a Song to an Artist\n3. Edit a Song\n4. Delete a Song\n5. Delete an Artist\n6. Back"
+  puts "1. Add a Song to an Artist\n2. Edit a Song\n3. Delete a Song\n4. Back to main menu"
   p '-------------------------------------------------------------'
   input2 = gets.chomp.to_i
   if input2 == 1
-    puts "Edit an Artist\nChange the Name:"
-    changed_name = gets.chomp
-    p 'Change the Date of Birth:'
-    changed_birthdate = gets.chomp
-    p 'Change the Country of Origin:'
-    changed_origin = gets.chomp
-    artist.update(name: changed_name, birthdate: changed_birthdate, origin: changed_origin)
-    list.output_list(artist)
-    submenu
+    p 'Song title:'
+    song_title = gets.chomp
+    p 'Date of release:'
+    song_release = gets.chomp
+    song = Song.new(title: song_title, premiere: song_release)
+    artist.add_to_artists_song_list(song)
+    list.show_artist(artist)
+    main_menu(list)
   elsif input2 == 2
-    add_song
-    submenu
-  elsif input2 == 3
     p 'Choose the Song:'
-    required_song = gets.chomp.capitalize!
-    p 'Change the Title'
-    changed_title = gets.chomp.capitalize!
-    p 'Change the date of release:'
-    changed_premiere = gets.chomp
-    if required_song == song.title
+    required_song = gets.chomp
+    if song = artist.find_song(required_song)
+      p 'Change the Title'
+      changed_title = gets.chomp
+      p 'Change the date of release:'
+      changed_premiere = gets.chomp
       song.update(title: changed_title, premiere: changed_premiere)
+      list.show_artist(artist)
+      song_menu(list, artist)
+    else
+      p 'Wrong title'
+      song_menu(list, artist)
     end
-    list.output_list(artist)
-    submenu
-  elsif input2 == 4
+  elsif input2 == 3
     p 'What song You want to delete?'
-    required_song = gets.chomp.capitalize!
-    artist.delete_song(required_song)
-    list.output_list(artist)
-    submenu
-  elsif input2 == 5
-    list.delete_artist(artist)
-    list.show_artists
-    submenu
-  elsif input2 == 6
-    main_menu
+    song_to_delete = gets.chomp
+    song = artist.find_song(song_to_delete)
+    artist.delete_song(song)
+    list.show_artist(artist)
+    song_menu(list, artist)
+  elsif input2 == 4
+    main_menu(list)
   else
     p 'Wrong input. Try again'
-    submenu
+    song_menu(list)
   end
  end
 
-def add_song
-  list = List.new('LIST')
-  song = Song.new(title: 'First song', premiere: '1998.11.04')
-  song1 = Song.new(title: 'Second song', premiere: '1996.10.01')
-  song2 = Song.new(title: 'Third song', premiere: '1988.07.23')
-
-  artist = Artist.new(name: 'Yamadu', birthdate: '1950.08.04', origin: 'Guinea')
-  artist1 = Artist.new(name: 'Bolokada', birthdate: '1968.12.01', origin: 'Guinea')
-  artist2 = Artist.new(name: 'Famoudou', birthdate: '1974.07.18', origin: 'Guinea')
-  artist.add_to_list(song)
-  artist.add_to_list(song1)
-  artist1.add_to_list(song2)
-
-  list.add_to_artists(artist)
-  list.add_to_artists(artist1)
-  list.add_to_artists(artist2)
-
+def add_song(list, artist)
   p 'Want to add a song to an artist? Y/N'
   input3 = gets.chomp.capitalize!
   if input3 == 'Y'
@@ -94,103 +58,30 @@ def add_song
     premiere = gets.chomp
     song = Song.new(title: title, premiere: premiere)
     artist.add_to_list(song)
-    list.output_list(artist)
-    add_song
+    list.show_artist(artist)
+    add_song(list, artist)
   else input3 == 'N'
   end
 end
 
-def desired_artist
-  list = List.new('LIST')
-  song = Song.new(title: 'First song', premiere: '1998.11.04')
-  song1 = Song.new(title: 'Second song', premiere: '1996.10.01')
-  song2 = Song.new(title: 'Third song', premiere: '1988.07.23')
-
-  artist = Artist.new(name: 'Yamadu', birthdate: '1950.08.04', origin: 'Guinea')
-  artist1 = Artist.new(name: 'Bolokada', birthdate: '1968.12.01', origin: 'Guinea')
-  artist2 = Artist.new(name: 'Famoudou', birthdate: '1974.07.18', origin: 'Guinea')
-  artist.add_to_list(song)
-  artist.add_to_list(song1)
-  artist1.add_to_list(song2)
-
-  list.add_to_artists(artist)
-  list.add_to_artists(artist1)
-  list.add_to_artists(artist2)
-
-  p 'What Artist you desire to see?'
-  required_artist = gets.chomp
-  if
-    required_artist == artist.name
-    list.output_list(artist)
-    p 'What next?'
-    submenu
-  else
-    looping
-  end
- end
-
-def looping
-  list = List.new('LIST')
-  song = Song.new(title: 'First song', premiere: '1998.11.04')
-  song1 = Song.new(title: 'Second song', premiere: '1996.10.01')
-  song2 = Song.new(title: 'Third song', premiere: '1988.07.23')
-
-  artist = Artist.new(name: 'Yamadu', birthdate: '1950.08.04', origin: 'Guinea')
-  artist1 = Artist.new(name: 'Bolokada', birthdate: '1968.12.01', origin: 'Guinea')
-  artist2 = Artist.new(name: 'Famoudou', birthdate: '1974.07.18', origin: 'Guinea')
-  artist.add_to_list(song)
-  artist.add_to_list(song1)
-  artist1.add_to_list(song2)
-
-  list.add_to_artists(artist)
-  list.add_to_artists(artist1)
-  list.add_to_artists(artist2)
-  loop do
-    p 'No such artist.Try again. Input the name or press Q to quit'
-    required_artist = gets.chomp
-    if required_artist == 'Q'
-      main_menu
-    elsif required_artist != artist.name
-      looping
-    else
-      list.output_list(artist)
-      p 'What next?'
-
-  end
-    break
+def choosing_artist(list)
+  artist_to_display = gets.chomp
+  if artist = list.find_artist(artist_to_display)
+    list.show_artist(artist)
+    song_menu(list, artist)
+  else artist != list.find_artist(artist_to_display)
+       p 'Try again'
+       main_menu(list)
   end
 end
 
-def main_menu
-  list = List.new('LIST')
-  song = Song.new(title: 'First song', premiere: '1998.11.04')
-  song1 = Song.new(title: 'Second song', premiere: '1996.10.01')
-  song2 = Song.new(title: 'Third song', premiere: '1988.07.23')
-
-  artist = Artist.new(name: 'Yamadu', birthdate: '1950.08.04', origin: 'Guinea')
-  artist1 = Artist.new(name: 'Bolokada', birthdate: '1968.12.01', origin: 'Guinea')
-  artist2 = Artist.new(name: 'Famoudou', birthdate: '1974.07.18', origin: 'Guinea')
-  artist.add_to_list(song)
-  artist.add_to_list(song1)
-  artist1.add_to_list(song2)
-
-  list.add_to_artists(artist)
-  list.add_to_artists(artist1)
-  list.add_to_artists(artist2)
-
+def main_menu(list)
   p '-------------------------------------------------------------'
-  puts "1. Show all Artists\n2. Show an Artist\n3. Add an Artist\n4. Quit the program"
+  menu = "1. Add an Artist\n2. Display an Artist\n3. Show all Artists\n4. Edit an artist\n5. Delete an artist\n6. Quit the program"
+  puts menu
   p '-------------------------------------------------------------'
   input1 = gets.chomp.to_i
-
   if input1 == 1
-    p 'All Artists'
-    list.show_artists
-    p main_menu
-  elsif input1 == 2
-    desired_artist
-    submenu
-  elsif input1 == 3
     p 'Add an Artist'
     p "Artist's Name:"
     name_input = gets.chomp
@@ -200,16 +91,45 @@ def main_menu
     origin_input = gets.chomp
     artist = Artist.new(name: name_input, birthdate: birthdate_input, origin: origin_input)
     list.add_to_artists(artist)
-    add_song
-    list.output_list(artist)
-    submenu
+    main_menu(list)
+  elsif input1 == 2
+    p 'What Artist you desire to see?'
+    choosing_artist(list)
+  elsif input1 == 3
+    p 'All Artists'
+    list.show_artists
+    main_menu(list)
   elsif input1 == 4
+    p 'What artist You want to edit?'
+    artist_to_update = gets.chomp
+    puts 'Change the Name:'
+    changed_name = gets.chomp
+    p 'Change the Date of Birth:'
+    changed_birthdate = gets.chomp
+    p 'Change the Country of Origin:'
+    changed_origin = gets.chomp
+    artist = list.find_artist(artist_to_update)
+    artist.update(name: changed_name, birthdate: changed_birthdate, origin: changed_origin)
+    list.show_artist(artist)
+    main_menu(list)
 
+  elsif input1 == 5
+    p 'What artist You want to delete?'
+    required_artist = gets.chomp
+    artist = list.find_artist(required_artist)
+    list.delete_artist(artist)
+    list.show_artists
+    main_menu(list)
+
+  elsif input1 == 6
+    exit
   else
-    p 'Wrong input try again'
-    input1 = gets.chomp.to_i
-    submenu
+    main_menu(list)
   end
-  end
+end
 
-main_menu
+list = List.new('list')
+artist = Artist.new(name: 'Yamadu', birthdate: '00', origin: 'USA')
+song = Song.new(title: 'First song', premiere: '99')
+
+main_menu(list)

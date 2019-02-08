@@ -17,7 +17,14 @@ class Artist
     @origin = origin
   end
 
-  def add_to_list(song)
+  def find_song(song_to_display)
+    @songs_list.find do |song|
+      song.title == song_to_display
+      song.title.casecmp(song_to_display)
+    end
+  end
+
+  def add_to_artists_song_list(song)
     @songs_list << song
   end
 
