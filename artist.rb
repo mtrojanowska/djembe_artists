@@ -20,7 +20,7 @@ class Artist
   def find_song(song_to_display)
     @songs_list.find do |song|
       song.title == song_to_display
-      song.title.casecmp(song_to_display)
+      song.title.casecmp(song_to_display) == 0
     end
   end
 

@@ -22,7 +22,7 @@ class List
   def find_artist(artist_to_display)
     @list_of_artists.find do |artist|
       artist.name == artist_to_display
-      artist.name.casecmp(artist_to_display)
+      artist.name.casecmp(artist_to_display) == 0
     end
   end
 
