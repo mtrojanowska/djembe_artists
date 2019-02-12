@@ -12,4 +12,5 @@ class Song
     @title = title
     @premiere = premiere
   end
+
 end
