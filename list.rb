@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 class List
-
   attr_reader :list_of_artists
 
   def initialize
