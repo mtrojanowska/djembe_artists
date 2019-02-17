@@ -1,11 +1,10 @@
 # frozen_string_literal: true
 
 class List
-  attr_accessor :list_title
+
   attr_reader :list_of_artists
 
-  def initialize(list_title)
-    @list_title = list_title
+  def initialize
     @list_of_artists = []
   end
 

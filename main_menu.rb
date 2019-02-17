@@ -89,10 +89,11 @@ class MainMenu
       @list.show_artists
       show
     when 4
-      update_artist
+      @list.show_artist(update_artist)
       show
     when 5
       delete_artist
+      @list.show_artists
       show
     when 6
       exit
@@ -135,7 +136,7 @@ class MainMenu
       changed_origin = gets.chomp
       artist = @list.find_artist(artist_to_update)
       artist.update(name: changed_name, birthdate: changed_birthdate, origin: changed_origin)
-      @list.show_artist(artist)
+      artist
     else
       p 'Wrong name'
       update_artist
@@ -147,7 +148,6 @@ class MainMenu
     required_artist = gets.chomp
     if artist = @list.find_artist(required_artist)
       @list.delete_artist(artist)
-      @list.show_artists
     else
       p 'Wrong artist'
       delete_artist

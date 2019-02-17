@@ -3,7 +3,7 @@
 require_relative 'list'
 require_relative 'main_menu'
 
-list = List.new('list')
+list = List.new
 main_menu = MainMenu.new(list: list)
 
 main_menu.show
