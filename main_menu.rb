@@ -1,9 +1,12 @@
+# frozen_string_literal: true
+
 require_relative 'artist'
 require_relative 'song_menu'
 
 class MainMenu
-  def initialize(list:)
+  def initialize(list:, song_menu:)
     @list = list
+    @song_menu = song_menu
   end
 
   def show
@@ -53,7 +56,7 @@ class MainMenu
     artist_to_display = gets.chomp
     if artist = @list.find_artist(artist_to_display)
       @list.show_artist(artist)
-      song_menu(artist)
+      @song_menu.show_song_menu(artist)
     else
       p 'Try again'
       show
