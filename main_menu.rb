@@ -4,9 +4,8 @@ require_relative 'artist'
 require_relative 'song_menu'
 
 class MainMenu
-  def initialize(list:, song_menu:)
+  def initialize(list:)
     @list = list
-    @song_menu = song_menu
   end
 
   def show
@@ -23,6 +22,7 @@ class MainMenu
     when 2
       p 'What Artist you desire to see?'
       choose_artist
+      show
     when 3
       p 'All Artists'
       @list.show_artists
@@ -56,7 +56,9 @@ class MainMenu
     artist_to_display = gets.chomp
     if artist = @list.find_artist(artist_to_display)
       @list.show_artist(artist)
-      @song_menu.show_song_menu(artist)
+      list = List.new
+      song_menu = SongMenu.new(list: list)
+      song_menu.show_song_menu(artist)
     else
       p 'Try again'
       show

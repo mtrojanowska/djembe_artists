@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require_relative 'song'
-require_relative 'artist'
 
 class SongMenu
   def initialize(list:)
