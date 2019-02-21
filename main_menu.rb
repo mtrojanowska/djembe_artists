@@ -56,9 +56,9 @@ class MainMenu
     artist_to_display = gets.chomp
     if artist = @list.find_artist(artist_to_display)
       @list.show_artist(artist)
-      list = List.new
-      song_menu = SongMenu.new(list: list)
-      song_menu.show_song_menu(artist)
+      list = @list
+      song_menu = SongMenu.new(list: list, artist: artist)
+      song_menu.show_song_menu
     else
       p 'Try again'
       show
