@@ -1,10 +1,9 @@
 # frozen_string_literal: true
 
 class List
-  attr_accessor :list_title
+  attr_reader :list_of_artists
 
-  def initialize(list_title)
-    @list_title = list_title
+  def initialize
     @list_of_artists = []
   end
 
@@ -13,13 +12,19 @@ class List
   end
 
   def show_artists
-    @list_of_artists.each do |artist|
-      p artist.name.to_s
+    @list_of_artists.each_with_index do |artist, i|
+      p "#{i + 1}. #{artist.name}"
     end
   end
 
-  def output_list(artist)
-    p "#{artist.name} recorded following songs:"
+  def find_artist(artist_to_display)
+    @list_of_artists.find do |artist|
+      artist.name.casecmp(artist_to_display) == 0
+    end
+  end
+
+  def show_artist(artist)
+    p "#{artist.name}, born #{artist.birthdate} in #{artist.origin} recorded following songs:"
     artist.songs_list.each do |song|
       p "#{song.title}, released: #{song.premiere}"
     end
