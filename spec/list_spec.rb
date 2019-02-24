@@ -1,51 +1,48 @@
 require_relative '../list'
 require_relative '../artist'
-require_relative '../song'
+
 
 RSpec.describe List do
-  describe "list methods" do
 
-    before(:each) do
-      @artist = Artist.new(name: "Jajo", birthdate: "999", origin: "GV")
-      @artist1 = Artist.new(name: "Toto", birthdate: "000", origin: "SL")
-    end
-
+  describe "#initialize" do
     it "initializes list of artists" do
       list_of_artists = ["one", "two", "three"]
       expect(list_of_artists).to eq(["one", "two", "three"])
     end
+  end
 
-    it "adds artist to the list of artists" do
+  describe "#add_to_artists" do
+    it "adds an artist to the list of artists" do
+      jajo = Artist.new(name: "Jajo", birthdate: "999", origin: "GV")
+      toto = Artist.new(name: "Toto", birthdate: "000", origin: "SL")
       list_of_artists = []
-      list_of_artists << @artist.name
-      list_of_artists << @artist1.name
-      expect(list_of_artists).to eq(["Jajo", "Toto"])
-
-      # @list_of_artists << @artist
-      # @list_of_artists << @artist1
-      # expect(@list_of_artists).to eq([@artist, @artist1])
+      list_of_artists << jajo
+      list_of_artists << toto
+      expect(list_of_artists).to eq([jajo, toto])
     end
+  end
 
-    before(:each) do
-      @list_of_artists = []
-      @artist = Artist.new(name: "Jajo", birthdate: "999", origin: "GV")
-      @artist1 = Artist.new(name: "Toto", birthdate: "000", origin: "SL")
-      @list_of_artists << @artist
-      @list_of_artists << @artist1
+  describe "#add_to_artists" do
+    it "finds an artist on the list of artists" do
+      jajo = Artist.new(name: "Jajo", birthdate: "999", origin: "GV")
+      toto = Artist.new(name: "Toto", birthdate: "000", origin: "SL")
+      list_of_artists = []
+      list_of_artists << jajo
+      list_of_artists << toto
+      artist_to_display = jajo
+      expect(list_of_artists).to include(artist_to_display)
     end
+  end
 
-    it "finds an artist" do
-      artist_to_display = @artist
-      expect(@list_of_artists).to include(artist_to_display)
+  describe '#delete_artist' do
+    it "deletes an artist from the list of artists" do
+      jajo = Artist.new(name: "Jajo", birthdate: "999", origin: "GV")
+      toto = Artist.new(name: "Toto", birthdate: "000", origin: "SL")
+      list_of_artists = []
+      list_of_artists << jajo
+      list_of_artists << toto
+      list_of_artists.delete(jajo)
+      expect(list_of_artists).to eq([toto])
     end
-
-    it "deletes an artist" do
-      @list_of_artists.delete(@artist)
-      expect(@list_of_artists).to eq([@artist1])
-    end
-
-
-
-
   end
 end
