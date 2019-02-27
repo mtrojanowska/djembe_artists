@@ -46,9 +46,9 @@ RSpec.describe Artist do
       first_song = Song.new(title: "First song", premiere: "00")
       second_song = Song.new(title: "1 song", premiere: "00")
       artist = Artist.new(name: "Jajo", birthdate: "1999", origin: "GV")
-      artist.songs_list << first_song.title
-      artist.songs_list << second_song.title
-      song_to_display = "First song"
+      artist.add_to_artists_song_list(first_song)
+      artist.add_to_artists_song_list(second_song)
+      song_to_display = first_song
       expect(artist.songs_list).to include(song_to_display)
     end
   end
@@ -58,8 +58,8 @@ RSpec.describe Artist do
       first_song = Song.new(title: "First song", premiere: "00")
       second_song = Song.new(title: "1 song", premiere: "00")
       artist = Artist.new(name: "Jajo", birthdate: "1999", origin: "GV")
-      artist.songs_list << first_song
-      artist.songs_list << second_song
+      artist.add_to_artists_song_list(first_song)
+      artist.add_to_artists_song_list(second_song)
       expect(artist.songs_list).to eq([first_song, second_song])
     end
   end
@@ -69,8 +69,8 @@ RSpec.describe Artist do
       first_song = Song.new(title: "First song", premiere: "00")
       second_song = Song.new(title: "1 song", premiere: "00")
       artist = Artist.new(name: "Jajo", birthdate: "1999", origin: "GV")
-      artist.songs_list << first_song
-      artist.songs_list << second_song
+      artist.add_to_artists_song_list(first_song)
+      artist.add_to_artists_song_list(second_song)
       artist.songs_list.delete(first_song)
       expect(artist.songs_list).to eq([second_song])
     end

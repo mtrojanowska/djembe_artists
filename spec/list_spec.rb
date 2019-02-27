@@ -1,36 +1,57 @@
 require_relative '../list'
 require_relative '../artist'
+require_relative '../song'
 
 
 RSpec.describe List do
 
-  describe "#initialize" do
-    it "initializes list of artists" do
-      list_of_artists = ["one", "two", "three"]
-      expect(list_of_artists).to eq(["one", "two", "three"])
-    end
-  end
-
-  describe "#add_to_artists" do
+ describe "#add_to_artists" do
     it "adds an artist to the list of artists" do
       jajo = Artist.new(name: "Jajo", birthdate: "999", origin: "GV")
       toto = Artist.new(name: "Toto", birthdate: "000", origin: "SL")
-      list_of_artists = []
-      list_of_artists << jajo
-      list_of_artists << toto
-      expect(list_of_artists).to eq([jajo, toto])
+      list = List.new
+      list.add_to_artists(jajo)
+      list.add_to_artists(toto)
+      expect(list.list_of_artists).to eq([jajo, toto])
     end
   end
 
-  describe "#add_to_artists" do
+  describe "#show_artists" do
+     it "show all artists on the list" do
+       jajo = Artist.new(name: "Jajo", birthdate: "999", origin: "GV")
+       toto = Artist.new(name: "Toto", birthdate: "000", origin: "SL")
+       list = List.new
+       list.add_to_artists(jajo)
+       list.add_to_artists(toto)
+       expect(list.show_artists).to eq([jajo, toto])
+     end
+   end
+
+  describe "#find_artist" do
     it "finds an artist on the list of artists" do
       jajo = Artist.new(name: "Jajo", birthdate: "999", origin: "GV")
       toto = Artist.new(name: "Toto", birthdate: "000", origin: "SL")
-      list_of_artists = []
-      list_of_artists << jajo
-      list_of_artists << toto
+      list = List.new
+      list.add_to_artists(jajo)
+      list.add_to_artists(toto)
       artist_to_display = jajo
-      expect(list_of_artists).to include(artist_to_display)
+      expect(list.list_of_artists[0].name).to eq(artist_to_display.name)
+    end
+  end
+
+  describe "#show_artist" do
+    it "finds an artist on the list of artists" do
+      jajo = Artist.new(name: "Jajo", birthdate: "999", origin: "GV")
+      toto = Artist.new(name: "Toto", birthdate: "000", origin: "SL")
+      first_song = Song.new(title: "First song", premiere: "00")
+      second_song = Song.new(title: "1 song", premiere: "00")
+      jajo.add_to_artists_song_list(first_song)
+      jajo.add_to_artists_song_list(second_song)
+      list = List.new
+      list.add_to_artists(jajo)
+      list.add_to_artists(toto)
+      artist_to_show = jajo
+      expect(list.show_artist(jajo)).to eq(artist_to_show.songs_list)
     end
   end
 
@@ -38,11 +59,12 @@ RSpec.describe List do
     it "deletes an artist from the list of artists" do
       jajo = Artist.new(name: "Jajo", birthdate: "999", origin: "GV")
       toto = Artist.new(name: "Toto", birthdate: "000", origin: "SL")
-      list_of_artists = []
-      list_of_artists << jajo
-      list_of_artists << toto
-      list_of_artists.delete(jajo)
-      expect(list_of_artists).to eq([toto])
+      list = List.new
+      list.add_to_artists(jajo)
+      list.add_to_artists(toto)
+      artist_to_display = jajo
+      list.list_of_artists.delete(jajo)
+      expect(list.list_of_artists).to eq([toto])
     end
   end
 end
