@@ -48,8 +48,8 @@ RSpec.describe Artist do
       artist = Artist.new(name: "Jajo", birthdate: "1999", origin: "GV")
       artist.add_to_artists_song_list(first_song)
       artist.add_to_artists_song_list(second_song)
-      song_to_display = first_song
-      expect(artist.songs_list).to include(song_to_display)
+      song_to_find = artist.find_song(first_song.title)
+      expect(artist.songs_list).to include(song_to_find)
     end
   end
 
@@ -71,7 +71,7 @@ RSpec.describe Artist do
       artist = Artist.new(name: "Jajo", birthdate: "1999", origin: "GV")
       artist.add_to_artists_song_list(first_song)
       artist.add_to_artists_song_list(second_song)
-      artist.songs_list.delete(first_song)
+      artist.delete_song(first_song)
       expect(artist.songs_list).to eq([second_song])
     end
   end
