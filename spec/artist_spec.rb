@@ -19,7 +19,6 @@ RSpec.describe Artist do
     end
   end
 
-
   describe "#update" do
     it "updates the artist's name" do
       artist = Artist.new(name: "Jajo", birthdate: "999", origin: "GV")
@@ -49,7 +48,7 @@ RSpec.describe Artist do
       artist.add_to_artists_song_list(first_song)
       artist.add_to_artists_song_list(second_song)
       song_to_find = artist.find_song(first_song.title)
-      expect(artist.songs_list).to include(song_to_find)
+      expect(song_to_find).to eq(first_song)
     end
   end
 

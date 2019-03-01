@@ -1,8 +1,6 @@
 require_relative '../list'
 require_relative '../artist'
 
-
-
 RSpec.describe List do
 
  describe "#add_to_artists" do
