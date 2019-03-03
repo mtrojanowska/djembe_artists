@@ -33,4 +33,5 @@ class List
   def delete_artist(required_artist)
     @list_of_artists.delete_if { |artist| artist == required_artist }
   end
+
 end
